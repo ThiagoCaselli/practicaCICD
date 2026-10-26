@@ -9,7 +9,7 @@ name: Preview en Pull Request
 
 # TODO A1: Cambiá el trigger para que este workflow corra en cada Pull Request.
 on:
-  workflow_dispatch:
+  pull_request:
 
 permissions:
   contents: read
@@ -48,6 +48,8 @@ jobs:
           NEXT_PUBLIC_BUILD_SHA: "TODO"
           NEXT_PUBLIC_BUILD_REF: "TODO"
           NEXT_PUBLIC_BUILD_TIME: ${{ github.event.pull_request.updated_at }}
+          NEXT_PUBLIC_BUILD_SHA: ${{ github.sha }}
+          NEXT_PUBLIC_BUILD_REF: ${{ github.head_ref || github.ref_name }}
 
       - name: Deploy a preview channel
         uses: FirebaseExtended/action-hosting-deploy@v0
@@ -56,7 +58,7 @@ jobs:
           # TODO A3: Reemplazá el nombre del secreto por el que creó
           #          `firebase init hosting:github` en tu repo
           #          (Settings → Secrets and variables → Actions).
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_REEMPLAZAR }}
-          projectId: REEMPLAZAR-POR-TU-PROJECT-ID
+          firebaseServiceAccount: ${{ FIREBASE_SERVICE_ACCOUNT_PRACTICACICD }}
+          projectId: practicacicd
           # TODO A3: Definí cuánto tiempo vive el preview (ej. 3d). ¿Por qué no conviene que viva para siempre?
-          # expires: ???
+          expires: 3d
