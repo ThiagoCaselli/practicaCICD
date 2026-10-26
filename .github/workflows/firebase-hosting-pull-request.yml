@@ -48,8 +48,8 @@ jobs:
           NEXT_PUBLIC_BUILD_SHA: ${{ github.sha }}
           NEXT_PUBLIC_BUILD_REF: ${{ github.head_ref || github.ref_name }}
           NEXT_PUBLIC_BUILD_TIME: ${{ github.event.pull_request.updated_at }}
-          NEXT_PUBLIC_BUILD_SHA: ${{ github.sha }}
-          NEXT_PUBLIC_BUILD_REF: ${{ github.head_ref || github.ref_name }}
+
+
 
       - name: Deploy a preview channel
         uses: FirebaseExtended/action-hosting-deploy@v0
